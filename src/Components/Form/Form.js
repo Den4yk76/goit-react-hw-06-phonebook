@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import contactsActions from '../../redux/contacts/contacts-actions';
 
-export default class Form extends Component {
+class Form extends Component {
   state = {
     name: '',
     number: '',
@@ -15,7 +17,6 @@ export default class Form extends Component {
 
   onChange = e => {
     const { name, value } = e.currentTarget;
-
     this.setState({ [name]: value });
   };
 
@@ -56,6 +57,9 @@ export default class Form extends Component {
   }
 }
 
-Form.propTypes = {
-  addContact: PropTypes.func,
-};
+const mapDispatchToProps = dispatch => ({
+  addContact: (userName, userNumber) =>
+    dispatch(contactsActions.addContact(userName, userNumber)),
+});
+
+export default connect(null, mapDispatchToProps)(Form);
