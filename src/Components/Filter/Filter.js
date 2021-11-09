@@ -1,4 +1,6 @@
-export default function Filter({ contacts, filter }) {
+import { connect } from 'react-redux';
+
+function Filter({ contacts, filter }) {
   const findUsers = () => {
     return contacts.filter(el =>
       el.name.toLowerCase().includes(filter.toLowerCase()),
@@ -21,3 +23,12 @@ export default function Filter({ contacts, filter }) {
     );
   });
 }
+
+const mapStateToProps = state => {
+  return {
+    contacts: state.contacts.items,
+    // filter: state.contacts.filter,
+  };
+};
+
+export default connect(mapStateToProps, null)(Filter);

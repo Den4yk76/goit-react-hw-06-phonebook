@@ -6,7 +6,6 @@ import './styles.css';
 import store from '../redux/store';
 
 export default function App() {
-  const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
 
   // useEffect(() => {
@@ -20,30 +19,14 @@ export default function App() {
   //   localStorage.setItem('contacts', JSON.stringify(contacts));
   // }, [contacts]);
 
-  // const addContact = (userName, userNumber) => {
-  //   const contactsArr = [];
-
-  //   contacts.forEach(el => {
-  //     contactsArr.push(el.name, el.number);
-  //   });
-
-  //   if (contactsArr.includes(userNumber || userName.toLowerCase())) {
-  //     return alert('This person or number is already in contacts');
-  //   } else {
-  //     setContacts(prevState => [
-  //       ...prevState,
-  //       { id: uuidv4(), name: userName, number: userNumber },
-  //     ]);
-  //   }
-  // };
-
   const findContact = name => {
     setFilter(name);
+    // changeFilter(name);
   };
 
-  const deleteContact = e => {
-    setContacts(prevState => prevState.filter(el => el.id !== e.target.id));
-  };
+  // const deleteContact = e => {
+  //   setContacts(prevState => prevState.filter(el => el.id !== e.target.id));
+  // };
 
   return (
     <div>
@@ -52,9 +35,9 @@ export default function App() {
       <h2>Contacts</h2>
       <ContactsList
         filter={filter}
-        contacts={contacts}
+        // contacts={contacts}
         findContact={findContact}
-        deleteContact={deleteContact}
+        // deleteContact={deleteContact}
       />
     </div>
   );

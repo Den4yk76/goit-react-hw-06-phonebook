@@ -10,4 +10,14 @@ const addContact = (userName, userNumber) => ({
   },
 });
 
-export default { addContact };
+const deleteContact = id => ({
+  type: types.DELETE,
+  payload: id,
+});
+
+const changeFilter = value => ({
+  type: types.FIND,
+  payload: value,
+});
+
+export default { addContact, deleteContact, changeFilter };
