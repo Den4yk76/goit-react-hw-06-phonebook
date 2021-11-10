@@ -21,8 +21,14 @@ function ContactsListItem({ contacts, deleteContact }) {
   });
 }
 
+const mapStateToProps = state => {
+  return {
+    contacts: state.contacts.items,
+  };
+};
+
 const mapDispatchToProps = dispatch => ({
   deleteContact: id => dispatch(contactsActions.deleteContact(id)),
 });
 
-export default connect(null, mapDispatchToProps)(ContactsListItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsListItem);

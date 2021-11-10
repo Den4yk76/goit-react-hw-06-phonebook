@@ -3,13 +3,7 @@ import Filter from '../Filter/Filter';
 import { connect } from 'react-redux';
 import contactsActions from '../../redux/contacts/contacts-actions';
 
-function ContactsList({
-  filter,
-  contacts,
-  findContact,
-  deleteContact,
-  changeFilter,
-}) {
+function ContactsList({ filter, changeFilter }) {
   return (
     <>
       <h3>Find contacts by name</h3>
@@ -21,17 +15,7 @@ function ContactsList({
         title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
         required
       />
-      <ul>
-        {!filter ? (
-          <ContactsListItem contacts={contacts} deleteContact={deleteContact} />
-        ) : (
-          <Filter
-            filter={filter}
-            contacts={contacts}
-            deleteContact={deleteContact}
-          />
-        )}
-      </ul>
+      <ul>{!filter ? <ContactsListItem /> : <Filter />}</ul>
     </>
   );
 }

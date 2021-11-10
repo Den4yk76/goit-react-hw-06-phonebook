@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
+import contactsActions from '../../redux/contacts/contacts-actions';
 
-function Filter({ contacts, filter }) {
+function Filter({ contacts, filter, deleteContact }) {
   const findUsers = () => {
     return contacts.filter(el =>
       el.name.toLowerCase().includes(filter.toLowerCase()),
@@ -15,7 +16,9 @@ function Filter({ contacts, filter }) {
           className="button"
           type="button"
           id={el.id}
-          onClick={this.props.deleteContact}
+          onClick={e => {
+            deleteContact(e.target.id);
+          }}
         >
           Delete
         </button>
@@ -27,8 +30,12 @@ function Filter({ contacts, filter }) {
 const mapStateToProps = state => {
   return {
     contacts: state.contacts.items,
-    // filter: state.contacts.filter,
+    filter: state.contacts.filter,
   };
 };
 
-export default connect(mapStateToProps, null)(Filter);
+const mapDispatchToProps = dispatch => ({
+  deleteContact: id => dispatch(contactsActions.deleteContact(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

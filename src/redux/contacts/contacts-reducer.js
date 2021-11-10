@@ -31,9 +31,7 @@ const items = (state = [], { type, payload }) => {
 const filter = (state = '', { type, payload }) => {
   switch (type) {
     case types.FIND:
-      console.log('FIND reducer');
       return payload;
-    // return state;
 
     default:
       return state;
