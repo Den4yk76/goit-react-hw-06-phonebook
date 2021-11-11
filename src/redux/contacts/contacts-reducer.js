@@ -8,7 +8,17 @@ import actions from './contacts-actions';
 //     filter: '',
 //   },
 
-const items = createReducer([], {
+const initData = () => {
+  const data = localStorage.getItem('contacts');
+  if (data) {
+    console.log(JSON.parse(data));
+    return JSON.parse(data);
+  } else {
+    return [];
+  }
+};
+
+const items = createReducer(initData(), {
   [actions.addContact]: (state, { payload }) => {
     const contactsArr = [];
     state.forEach(el => {
@@ -19,11 +29,17 @@ const items = createReducer([], {
       alert('This person or number is already in contacts');
       return state;
     } else {
+      localStorage.setItem('contacts', JSON.stringify([...state, payload]));
       return [...state, payload];
     }
   },
-  [actions.deleteContact]: (state, { payload }) =>
-    state.filter(({ id }) => id !== payload),
+  [actions.deleteContact]: (state, { payload }) => {
+    localStorage.setItem(
+      'contacts',
+      JSON.stringify(state.filter(({ id }) => id !== payload)),
+    );
+    return state.filter(({ id }) => id !== payload);
+  },
 });
 
 const filter = createReducer('', {
